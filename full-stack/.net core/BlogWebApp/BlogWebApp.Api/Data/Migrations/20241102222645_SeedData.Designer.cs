@@ -4,16 +4,19 @@ using BlogWebApp.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BlogWebApp.Api.Data.Migrations
+namespace BlogWebApp.Api.Data.migrations
 {
     [DbContext(typeof(BlogWebAppDbContext))]
-    partial class BlogWebAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241102222645_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
