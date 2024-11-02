@@ -1,0 +1,41 @@
+# ASP.NET Core
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.db
+*.suo
+*.user
+*.vs/
+.vscode/
+project.lock.json
+project.fragment.lock.json
+*.sln.ide
+*.sln.dotSettings
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Aa][Rr][Mm][Oo][Rr]/
+
+# ASP.NET Core specific files
+*.db
+*.db-journal
+
+# User-specific files
+*.user
+*.suo
+
+# Visual Studio
+.vs/
+*.sln.docstates
