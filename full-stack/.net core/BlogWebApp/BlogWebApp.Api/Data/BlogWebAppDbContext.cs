@@ -90,5 +90,4 @@ public class BlogWebAppDbContext(DbContextOptions<BlogWebAppDbContext> options) 
             }
         );
     }
-
 }
