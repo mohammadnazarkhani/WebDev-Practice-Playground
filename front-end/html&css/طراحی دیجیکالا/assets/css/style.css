@@ -207,3 +207,55 @@ button#search_btn {
   top: 233px;
   left: 25px;
 }
+
+/* banner section of website  */
+#banner_container {
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  overflow: hidden;
+}
+
+#banner_container > img {
+  width: 100%;
+  aspect-ratio: 3 / 1;
+}
+
+#right_banner_btn {
+  border: solid 1px #d3d3d3;
+  border-radius: 50px;
+  width: 40px;
+  aspect-ratio: 1 / 1;
+  font-family: consolas;
+  font-weight: bold;
+  font-size: large;
+  position: absolute;
+  position: absolute;
+  right: auto;
+  bottom: -150px;
+  right: 40px;
+}
+
+#left_banner_btn {
+  border: solid 1px #d3d3d3;
+  border-radius: 50px;
+  width: 40px;
+  aspect-ratio: 1 / 1;
+  font-family: consolas;
+  font-weight: bold;
+  font-size: large;
+  position: absolute;
+  position: absolute;
+  right: auto;
+  bottom: -150px;
+  right: 85px;
+}
+
+#banner_pagination {
+  font-size: x-large;
+  font-weight: bold;
+  position: absolute;
+  right: auto;
+  bottom: -170px;
+  right: 674px;
+  color: white;
+}
