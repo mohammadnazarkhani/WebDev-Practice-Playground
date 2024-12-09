@@ -118,6 +118,7 @@ input#sercch_bar:focus {
 }
 
 button#search_btn {
+  background-color: inherit;
   width: 55px;
   border: none;
   border-radius: inherit;
