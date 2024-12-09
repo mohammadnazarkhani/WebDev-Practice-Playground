@@ -4,18 +4,231 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>دیجی کالا</title>
+    <!-- importing bxicon(a icon provider cdn) as font -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- Website top header(with ad bar, logo, and search bar, navbar and etc) -->
     <header id="website_header">
-      <div id="top_ad_bar"></div>
+      <div id="top_ad_bar">
+        <img
+          id="top_ad_bar_gif"
+          src="assets/img/ad_bar_gif.gif"
+          alt="advertisement"
+        />
+      </div>
 
-      <header id="main_header"></header>
+      <header id="main_header">
+        <div id="logo_search_container">
+          <img id="logo" src="assets/img/logo.svg" alt="logo" />
 
-      <nav id="main_navbar"></nav>
+          <form id="search_form">
+            <input type="text" name="search" id="sercch_bar" />
+
+            <button type="submit" id="search_btn">
+              <i class="bx bx-search"></i>
+            </button>
+          </form>
+        </div>
+
+        <div id="login_cart_container">
+          <button id="login_btn">
+            <i class="bx bx-log-in"></i>
+            ورود | ثبت نام
+          </button>
+
+          <span class="vertical-seperator"></span>
+
+          <i class="bx bx-cart"></i>
+        </div>
+      </header>
+
+      <div id="website_navigation_bar">
+        <nav id="main_navbar">
+          <ul id="main-navigation_list">
+            <li>دسته‌بندی کالاها</li>
+            <span class="vertical-seperator"></span>
+            <li>شگفت‌انگیزها</li>
+            <li>سوپرمارکت</li>
+            <li>کارت هدیه</li>
+            <li>پرفروش ترین‌ها</li>
+            <li>تخفیف‌ها و پیشنهاد‌ها</li>
+            <span class="vertical-seperator"></span>
+            <li>سوالی دارید؟</li>
+            <li>در دیجی‌کالا بفروشید!</li>
+          </ul>
+        </nav>
+
+        <button class="btn orange-secondary">
+          <i class="bx bx-location-plus"></i>
+          شهر خود را انتخاب کنید
+        </button>
+      </div>
     </header>
 
     <!-- Website main section -->
-    <main></main>
+    <main>
+      <div id="stories_container">
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-img-container">
+            <img
+              src="/assets/img/sample_story_img.jpg"
+              alt="story"
+              class="story-img"
+            />
+
+            <p>
+              جایزه 10 میلیونی!
+              <br />
+              Ps5 Pro
+            </p>
+          </div>
+        </div>
+
+        <button id="stories_left_btn" class="btn btn-nav-left"></button>
+      </div>
+
+      <div id="banner_container">
+        <img
+          src="/assets/img/sample_banner_1.jpg"
+          alt="banner"
+          class="banner"
+        />
+
+        <button id="right_banner_btn" class="btn btn-nav-right"></button>
+        <button id="left_banner_btn" class="btn btn-nav-left"></button>
+      </div>
+    </main>
   </body>
 </html>
