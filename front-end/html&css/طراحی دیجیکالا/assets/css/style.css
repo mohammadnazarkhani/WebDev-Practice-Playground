@@ -1,0 +1,99 @@
+/* initial settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.bx {
+  font-size: x-large;
+  transform: rotateY(180deg);
+}
+
+/* global styles */
+.vertical-separator {
+  min-height: 24px;
+  width: 1px;
+  background-color: #e0e0e2;
+}
+
+/* Website header styling */
+header#website_header {
+  position: fixed;
+  background-color: white;
+}
+#top_ad_bar_gif {
+  width: 100vw;
+  height: 60px;
+}
+/* website header middle section */
+#main_header {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  padding-left: 30px;
+  padding-right: 15px;
+}
+/* adjusting the display of containers */
+#logo_search_container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+#login_cart_container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#logo {
+  width: 200px;
+  height: 35px;
+}
+/* search bar and search btn styling */
+form#search_form {
+  display: flex;
+  flex-direction: row;
+  background-color: #f0f0f1;
+  width: 600px;
+  height: 44px;
+  border-radius: 10px;
+}
+
+input#sercch_bar {
+  border-radius: inherit;
+  background-color: #f0f0f1;
+  flex-grow: 2;
+  border: none;
+}
+
+input#sercch_bar:focus {
+  outline: none;
+}
+
+button#search_btn {
+  width: 55px;
+  border: none;
+  border-radius: inherit;
+  transform: rotateY(180deg);
+}
+/* second portion of the website middle portion of top header */
+#login_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  height: 38px;
+  width: 133px;
+  border-radius: 10px;
+  border: solid 1px #d3d3d3;
+  background-color: white;
+}
