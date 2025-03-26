@@ -4,7 +4,7 @@
     <Application.Resources>
         <Style TargetType="{x:Type TabControl}">
             <Setter Property="Background"
-                    Value="#f3f3f3"/>
+                    Value="#eff6fc"/>
             <Setter Property="BorderThickness"
                     Value="0"/>
             <Setter Property="Padding"
@@ -32,16 +32,18 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected"
-                                    Value="True">
+                                     Value="True">
                                 <Setter TargetName="Border"
                                         Property="Background"
                                         Value="White"/>
+                                <Setter Property="Panel.ZIndex"
+                                        Value="1"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver"
-                                    Value="True">
+                                     Value="True">
                                 <Setter TargetName="Border"
                                         Property="Background"
-                                        Value="#E5E5E5"/>
+                                        Value="#deecf9"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

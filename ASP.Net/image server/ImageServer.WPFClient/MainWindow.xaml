@@ -37,7 +37,8 @@
         <Grid DockPanel.Dock="Top"
               Height="30"
               Background="#2b579a"
-              MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+              MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+              Margin="0,1,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -91,8 +92,6 @@
         </Grid>
 
         <uc:RibbonTabPanel DockPanel.Dock="Top"/>
-
-        <uc:MainToolbar DockPanel.Dock="Top"/>
 
         <Grid>
             <uc:ImageGrid/>
