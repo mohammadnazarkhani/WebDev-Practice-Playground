@@ -47,6 +47,15 @@ public class ImagePersistenceService : IImagePersistenceService
         return Task.CompletedTask;
     }
 
+    public async Task DeleteAllImagesAsync()
+    {
+        var images = await _unitOfWork.Images.GetAllAsync();
+        foreach (var image in images)
+        {
+            _unitOfWork.Images.Remove(image);
+        }
+    }
+
     public async Task SaveChangesAsync() =>
         await _unitOfWork.SaveChangesAsync();
 }

@@ -196,25 +196,28 @@ public class ImageService : IImageService
         return (true, image.ToDto(_httpContextAccessor));
     }
 
-    public (bool success, string message) CleanupUploads()
+    public async Task<(bool success, string message)> DeleteAllImagesAsync()
     {
-        var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), _fileSettings.UploadPath);
-        if (!Directory.Exists(uploadsPath))
-        {
-            return (false, $"Directory '{_fileSettings.UploadPath}' does not exist.");
-        }
-
         try
         {
-            foreach (var file in Directory.GetFiles(uploadsPath))
+            var images = await _persistenceService.GetAllImagesAsync();
+
+            foreach (var image in images)
             {
-                _fileService.DeleteFile(file);
+                _fileService.DeleteFile(image.FilePath);
+                if (!string.IsNullOrEmpty(image.ThumbnailPath))
+                    _fileService.DeleteFile(image.ThumbnailPath);
             }
-            return (true, $"Directory '{_fileSettings.UploadPath}' cleaned successfully.");
+
+            await _persistenceService.DeleteAllImagesAsync();
+            await _persistenceService.SaveChangesAsync();
+
+            return (true, "All images deleted successfully");
         }
         catch (Exception ex)
         {
-            return (false, $"Failed to clean directory '{_fileSettings.UploadPath}': {ex.Message}");
+            _logger.LogError(ex, "Error deleting all images");
+            return (false, "Failed to delete all images");
         }
     }
 

@@ -9,5 +9,6 @@ public interface IImagePersistenceService
     Task<List<Image>> GetAllImagesAsync();
     Task<Image> UpdateImageAsync(Image image);
     Task DeleteImageAsync(Image image);
+    Task DeleteAllImagesAsync();
     Task SaveChangesAsync();
 }
