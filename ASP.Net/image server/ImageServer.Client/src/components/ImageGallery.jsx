@@ -2,9 +2,11 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getImages, deleteImage } from "../services/api";
 import { toast } from "react-hot-toast";
 import { FaTrash, FaEdit } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function ImageGallery() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { data: images, isLoading } = useQuery("images", getImages);
 
   const deleteMutation = useMutation(deleteImage, {
@@ -30,7 +32,8 @@ export default function ImageGallery() {
             <img
               src={image.thumbnailUrl}
               alt={image.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover cursor-pointer"
+              onClick={() => navigate(`/images/${image.id}`)}
             />
             <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-50 transition-all flex items-center justify-center opacity-0 hover:opacity-100">
               <button
@@ -39,7 +42,10 @@ export default function ImageGallery() {
               >
                 <FaTrash />
               </button>
-              <button className="p-2 bg-blue-600 text-white rounded-full mx-2">
+              <button 
+                onClick={() => navigate(`/images/${image.id}`)}
+                className="p-2 bg-blue-600 text-white rounded-full mx-2"
+              >
                 <FaEdit />
               </button>
             </div>
