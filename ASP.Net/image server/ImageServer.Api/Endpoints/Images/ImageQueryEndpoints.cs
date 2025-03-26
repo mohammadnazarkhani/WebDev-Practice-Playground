@@ -57,6 +57,30 @@ public static class ImageQueryEndpoints
         .DisableAntiforgery()
         .CacheOutput(x => x.Expire(TimeSpan.FromHours(1)));
 
+
+        app.MapGet("/images/{id}/details", async (string id, IImageService imageService) =>
+        {
+            if (!Guid.TryParseExact(id, "D", out Guid guidId))
+                return Results.BadRequest(new { error = "Invalid GUID format" });
+
+            var (found, details, error) = await imageService.GetImageDetailsAsync(guidId);
+            if (!found) return Results.NotFound(new { error });
+
+            return Results.Ok(details);
+        })
+        .WithOpenApi(operation =>
+        {
+            operation.Summary = "Get detailed image information";
+            operation.Description = "Retrieve detailed information about a specific image by its ID, including file paths and metadata";
+            operation.Tags = ImageTags;
+            operation.Parameters[0].Description = "The ID of the image";
+            return operation;
+        })
+        .Produces<ImageDetailsResponseDto>()
+        .ProducesProblem(StatusCodes.Status404NotFound)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithName("GetImageDetails");
+
         app.MapGet("/images/{id}/thumbnail", async (string id, IImageService imageService) =>
         {
             if (!Guid.TryParseExact(id, "D", out Guid guidId))
