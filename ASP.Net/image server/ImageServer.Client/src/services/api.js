@@ -33,4 +33,9 @@ export const updateImage = async (id, formData) => {
   return response.data;
 };
 
+export const getImageDetails = async (id) => {
+  const response = await api.get(`/images/${id}/details`);
+  return response.data;
+};
+
 export default api;
