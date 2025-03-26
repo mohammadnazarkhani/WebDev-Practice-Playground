@@ -5,6 +5,7 @@ import ImageGallery from "./components/ImageGallery";
 import ImageDetails from "./components/ImageDetails";
 import Header from "./components/Header";
 import UploadPage from "./pages/UploadPage";
+import ImageDetailsPage from "./pages/ImageDetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<ImageGallery />} />
               <Route path="/upload" element={<UploadPage />} />
-              <Route path="/images/:id" element={<ImageDetails />} />
+              <Route path="/images/:id" element={<ImageDetailsPage />} />
             </Routes>
           </main>
           <Toaster position="bottom-right" />

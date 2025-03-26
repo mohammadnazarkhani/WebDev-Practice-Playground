@@ -26,24 +26,30 @@ export default function ImageGallery() {
       {images?.map((image) => (
         <div
           key={image.id}
-          className="bg-white rounded-lg shadow-md overflow-hidden"
+          className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+          onClick={() => navigate(`/images/${image.id}`, { state: { image } })}
         >
           <div className="relative aspect-square">
             <img
               src={image.thumbnailUrl}
               alt={image.name}
-              className="w-full h-full object-cover cursor-pointer"
-              onClick={() => navigate(`/images/${image.id}`)}
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-50 transition-all flex items-center justify-center opacity-0 hover:opacity-100">
               <button
-                onClick={() => deleteMutation.mutate(image.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteMutation.mutate(image.id);
+                }}
                 className="p-2 bg-red-600 text-white rounded-full mx-2"
               >
                 <FaTrash />
               </button>
-              <button 
-                onClick={() => navigate(`/images/${image.id}`)}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/images/${image.id}`, { state: { image } });
+                }}
                 className="p-2 bg-blue-600 text-white rounded-full mx-2"
               >
                 <FaEdit />
