@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { updateImage, patchImage } from "../services/api";
 import { toast } from "react-hot-toast";
-import { FaUpload, FaImage } from "react-icons/fa";
+import { FaUpload, FaImage, FaArrowLeft } from "react-icons/fa";
 
 export default function EditImagePage() {
   const navigate = useNavigate();
@@ -69,9 +69,17 @@ export default function EditImagePage() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900">Edit Image</h2>
-        <p className="mt-2 text-gray-600">Update image details</p>
+      <div className="relative mb-8">
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute left-0 top-1/2 -translate-y-1/2 inline-flex items-center text-gray-600 hover:text-gray-900"
+        >
+          <FaArrowLeft className="mr-2" /> Back
+        </button>
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-gray-900">Edit Image</h2>
+          <p className="mt-2 text-gray-600">Update image details</p>
+        </div>
       </div>
 
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
