@@ -13,7 +13,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
         <Style x:Key="WindowButtonStyle"
-                TargetType="Button">
+               TargetType="Button">
             <Setter Property="Width"
                     Value="46"/>
             <Setter Property="Height"
@@ -24,7 +24,7 @@
                     Value="Transparent"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver"
-                        Value="True">
+                         Value="True">
                     <Setter Property="Background"
                             Value="#E5E5E5"/>
                 </Trigger>
@@ -35,9 +35,9 @@
     <DockPanel>
         <!-- Custom Title Bar -->
         <Grid DockPanel.Dock="Top"
-                Height="30"
-                Background="#F0F0F0"
-                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+              Height="30"
+              Background="#F0F0F0"
+              MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -47,7 +47,7 @@
             <Image Grid.Column="0"
                    Source="pack://application:,,,/Resources/app-icon.png"
                    Width="20"
-                    Height="20"
+                   Height="20"
                    Margin="5,0,5,0"
                    VerticalAlignment="Center"/>
 
@@ -90,7 +90,7 @@
         </Grid>
 
         <Menu DockPanel.Dock="Top"
-                Background="#F0F0F0">
+              Background="#F0F0F0">
             <MenuItem Header="_File">
                 <MenuItem Header="_Upload"
                           Command="{Binding UploadImageCommand}"/>
@@ -101,6 +101,8 @@
                           Click="MenuItem_Exit"/>
             </MenuItem>
         </Menu>
+
+        <uc:RibbonTabPanel DockPanel.Dock="Top"/>
 
         <uc:MainToolbar DockPanel.Dock="Top"/>
 

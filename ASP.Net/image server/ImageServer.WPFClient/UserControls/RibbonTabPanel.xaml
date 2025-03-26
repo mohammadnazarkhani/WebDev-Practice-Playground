@@ -1,0 +1,53 @@
+<UserControl x:Class="ImageServer.WPFClient.UserControls.RibbonTabPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <TabControl Style="{StaticResource {x:Type TabControl}}"
+            Background="#F0F0F0">
+        <TabItem Header="Home">
+            <StackPanel Orientation="Horizontal">
+                <GroupBox Header="Images"
+                        Margin="5"
+                        Padding="5">
+                    <ToolBar Background="Transparent"
+                            ToolBarTray.IsLocked="True">
+                        <Button Command="{Binding UploadImageCommand}"
+                                ToolTip="Upload Image">
+                            <StackPanel>
+                                <Image Source="pack://application:,,,/Resources/upload.png"
+                                        Width="24"
+                                        Height="24"/>
+                                <TextBlock Text="Upload"
+                                        TextAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding LoadImagesCommand}"
+                                ToolTip="Refresh">
+                            <StackPanel>
+                                <Image Source="pack://application:,,,/Resources/refresh.png"
+                                        Width="24"
+                                        Height="24"/>
+                                <TextBlock Text="Refresh"
+                                        TextAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </ToolBar>
+                </GroupBox>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="View">
+            <StackPanel Orientation="Horizontal">
+                <GroupBox Header="Layout"
+                        Margin="5"
+                        Padding="5">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="Grid"
+                                IsChecked="True"
+                                Margin="5"/>
+                        <RadioButton Content="List"
+                                Margin="5"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>
