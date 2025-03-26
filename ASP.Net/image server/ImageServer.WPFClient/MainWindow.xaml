@@ -2,16 +2,95 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:uc="clr-namespace:ImageServer.WPFClient.UserControls"
-        Title="Image Server Client"
         Height="450"
-        Width="800">
+        Width="800"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="White"
+        BorderBrush="#E5E5E5"
+        BorderThickness="1">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <Style x:Key="WindowButtonStyle"
+                TargetType="Button">
+            <Setter Property="Width"
+                    Value="46"/>
+            <Setter Property="Height"
+                    Value="30"/>
+            <Setter Property="BorderThickness"
+                    Value="0"/>
+            <Setter Property="Background"
+                    Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                        Value="True">
+                    <Setter Property="Background"
+                            Value="#E5E5E5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <DockPanel>
+        <!-- Custom Title Bar -->
+        <Grid DockPanel.Dock="Top"
+                Height="30"
+                Background="#F0F0F0"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0"
+                   Source="pack://application:,,,/Resources/app-icon.png"
+                   Width="20"
+                    Height="20"
+                   Margin="5,0,5,0"
+                   VerticalAlignment="Center"/>
+
+            <TextBlock Grid.Column="1"
+                       Text="Image Server Client"
+                       VerticalAlignment="Center"
+                       Margin="5,0,0,0"
+                       FontSize="12"/>
+
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Style="{StaticResource WindowButtonStyle}"
+                        Click="MinimizeButton_Click">
+                    <Path Data="M 0,0 H 10"
+                          Stroke="Black"
+                          StrokeThickness="1"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
+                </Button>
+                <Button Style="{StaticResource WindowButtonStyle}"
+                        Click="MaximizeButton_Click">
+                    <Path Data="M 0,0 H 10 V 10 H 0 Z"
+                          Stroke="Black"
+                          StrokeThickness="1"
+                          Fill="Transparent"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
+                </Button>
+                <Button Style="{StaticResource WindowButtonStyle}"
+                        Click="CloseButton_Click"
+                        x:Name="CloseButton">
+                    <Path Data="M 0,0 L 10,10 M 0,10 L 10,0"
+                          Stroke="Black"
+                          StrokeThickness="1"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
         <Menu DockPanel.Dock="Top"
-              Background="#F0F0F0">
+                Background="#F0F0F0">
             <MenuItem Header="_File">
                 <MenuItem Header="_Upload"
                           Command="{Binding UploadImageCommand}"/>
