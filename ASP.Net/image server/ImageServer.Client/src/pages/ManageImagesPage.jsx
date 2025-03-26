@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { getImages, deleteImage } from "../services/api";
+import { getImages, deleteImage, deleteAllImages } from "../services/api";
 import { toast } from "react-hot-toast";
 import { FaEdit, FaTrash, FaEye, FaSync } from "react-icons/fa";
 
@@ -17,9 +17,27 @@ export default function ManageImagesPage() {
     onError: () => toast.error("Failed to delete image"),
   });
 
+  const deleteAllMutation = useMutation(deleteAllImages, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("images");
+      toast.success("All images deleted successfully");
+    },
+    onError: () => toast.error("Failed to delete all images"),
+  });
+
   const handleRefresh = () => {
     refetch();
     toast.success("Image list refreshed");
+  };
+
+  const handleDeleteAll = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete ALL images? This action cannot be undone!"
+      )
+    ) {
+      deleteAllMutation.mutate();
+    }
   };
 
   if (isLoading) {
@@ -30,12 +48,21 @@ export default function ManageImagesPage() {
     <div className="max-w-5xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Manage Images</h2>
-        <button
-          onClick={handleRefresh}
-          className="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg"
-        >
-          <FaSync className="mr-2" /> Refresh
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={handleRefresh}
+            className="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg"
+          >
+            <FaSync className="mr-2" /> Refresh
+          </button>
+          <button
+            onClick={handleDeleteAll}
+            className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg"
+            disabled={!images?.length}
+          >
+            <FaTrash className="mr-2" /> Delete All
+          </button>
+        </div>
       </div>
 
       <div className="bg-white shadow-md rounded-lg overflow-hidden">

@@ -45,4 +45,9 @@ export const getImageDetails = async (id) => {
   return response.data;
 };
 
+export const deleteAllImages = async () => {
+  const response = await api.delete("/images/all");
+  return response.data;
+};
+
 export default api;
