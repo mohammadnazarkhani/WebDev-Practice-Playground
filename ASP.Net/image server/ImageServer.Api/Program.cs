@@ -42,6 +42,7 @@ builder.Services.AddSwaggerGen(c =>
         Type = "string",
         Format = "binary"
     });
+    c.OperationFilter<FileUploadOperationFilter>();
 });
 
 builder.Services.AddDbContext<ImageDbContext>(options =>
