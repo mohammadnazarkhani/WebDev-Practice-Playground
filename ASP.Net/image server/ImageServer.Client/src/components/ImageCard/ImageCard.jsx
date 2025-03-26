@@ -4,7 +4,7 @@ export default function ImageCard({ image, onDelete, onNavigate }) {
   return (
     <div
       className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
-      onClick={() => onNavigate(image)}
+      onClick={() => onNavigate("details", image)}
     >
       <div className="relative aspect-square">
         <img
@@ -14,7 +14,7 @@ export default function ImageCard({ image, onDelete, onNavigate }) {
         />
         <ImageActions
           onDelete={() => onDelete(image.id)}
-          onEdit={() => onNavigate(image)}
+          onEdit={() => onNavigate("edit", image)}
         />
       </div>
       <div className="p-4">

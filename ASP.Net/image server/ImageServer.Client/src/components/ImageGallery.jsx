@@ -17,8 +17,12 @@ export default function ImageGallery() {
     onError: () => toast.error("Failed to delete image"),
   });
 
-  const handleNavigate = (image) => {
-    navigate(`/images/${image.id}`, { state: { image } });
+  const handleNavigate = (type, imageData) => {
+    if (type === "edit") {
+      navigate(`/images/${imageData.id}/edit`, { state: { image: imageData } });
+    } else {
+      navigate(`/images/${imageData.id}`, { state: { image: imageData } });
+    }
   };
 
   if (isLoading) {
@@ -32,7 +36,7 @@ export default function ImageGallery() {
           key={image.id}
           image={image}
           onDelete={(id) => deleteMutation.mutate(id)}
-          onNavigate={handleNavigate}
+          onNavigate={(path) => handleNavigate(path, image)}
         />
       ))}
     </div>
