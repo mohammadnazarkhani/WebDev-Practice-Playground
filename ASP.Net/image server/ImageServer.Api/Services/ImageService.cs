@@ -223,4 +223,34 @@ public class ImageService : IImageService
         var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), _fileSettings.UploadPath);
         return await _imageProcessor.CreateThumbnailAsync(sourcePath, uploadsPath);
     }
+
+    public async Task<(bool found, ImageDetailsResponseDto? details, string? error)> GetImageDetailsAsync(Guid id)
+    {
+        var image = await _persistenceService.GetImageAsync(id);
+        if (image == null) return (false, null, "Image not found");
+
+        var baseDto = image.ToDto(_httpContextAccessor);
+        var metadata = new Dictionary<string, object>
+        {
+            { "exists", File.Exists(image.FilePath) },
+            { "hasThumbnail", !string.IsNullOrEmpty(image.ThumbnailPath) && File.Exists(image.ThumbnailPath) },
+            { "extension", Path.GetExtension(image.FilePath).ToLowerInvariant() }
+        };
+
+        var details = new ImageDetailsResponseDto(
+            baseDto.Id,
+            baseDto.Name,
+            baseDto.ContentType,
+            baseDto.FileSize,
+            baseDto.CreatedAt,
+            baseDto.UpdatedAt,
+            baseDto.ImageUrl,
+            baseDto.ThumbnailUrl,
+            image.FilePath,
+            image.ThumbnailPath,
+            metadata
+        );
+
+        return (true, details, null);
+    }
 }

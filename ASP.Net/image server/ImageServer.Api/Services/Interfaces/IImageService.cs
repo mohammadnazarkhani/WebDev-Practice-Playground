@@ -13,4 +13,5 @@ public interface IImageService
     Task<(bool success, object result)> PatchImageAsync(Guid id, string? name, IFormFile? file);
     (bool success, string message) CleanupUploads();
     Task<(bool found, string? filePath, string? error)> GetThumbnailAsync(Guid id);
+    Task<(bool found, ImageDetailsResponseDto? details, string? error)> GetImageDetailsAsync(Guid id);
 }
