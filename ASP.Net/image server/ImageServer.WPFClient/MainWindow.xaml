@@ -89,19 +89,6 @@
             </StackPanel>
         </Grid>
 
-        <Menu DockPanel.Dock="Top"
-              Background="#F0F0F0">
-            <MenuItem Header="_File">
-                <MenuItem Header="_Upload"
-                          Command="{Binding UploadImageCommand}"/>
-                <MenuItem Header="_Refresh"
-                          Command="{Binding LoadImagesCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Exit"
-                          Click="MenuItem_Exit"/>
-            </MenuItem>
-        </Menu>
-
         <uc:RibbonTabPanel DockPanel.Dock="Top"/>
 
         <uc:MainToolbar DockPanel.Dock="Top"/>

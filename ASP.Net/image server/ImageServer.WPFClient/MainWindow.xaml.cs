@@ -13,11 +13,6 @@ public partial class MainWindow : Window
         Loaded += async (s, e) => await viewModel.LoadImages();
     }
 
-    private void MenuItem_Exit(object sender, RoutedEventArgs e)
-    {
-        Application.Current.Shutdown();
-    }
-
     private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (e.ClickCount == 2)
