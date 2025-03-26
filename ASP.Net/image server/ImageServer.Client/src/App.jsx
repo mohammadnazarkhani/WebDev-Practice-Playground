@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import UploadPage from "./pages/UploadPage";
 import ImageDetailsPage from "./pages/ImageDetailsPage";
 import GalleryPage from "./pages/GalleryPage";
+import EditImagePage from "./pages/EditImagePage";
+import ManageImagesPage from "./pages/ManageImagesPage";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +21,8 @@ function App() {
               <Route path="/" element={<GalleryPage />} />
               <Route path="/upload" element={<UploadPage />} />
               <Route path="/images/:id" element={<ImageDetailsPage />} />
+              <Route path="/images/:id/edit" element={<EditImagePage />} />
+              <Route path="/manage" element={<ManageImagesPage />} />
             </Routes>
           </main>
           <Toaster position="bottom-right" />
