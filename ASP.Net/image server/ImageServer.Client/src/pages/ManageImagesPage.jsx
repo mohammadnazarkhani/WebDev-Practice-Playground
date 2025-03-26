@@ -1,10 +1,17 @@
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { getImages, deleteImage, deleteAllImages } from "../services/api";
 import { toast } from "react-hot-toast";
 import { FaEdit, FaTrash, FaEye, FaSync } from "react-icons/fa";
+import ConfirmationModal from "../components/ConfirmationModal";
 
 export default function ManageImagesPage() {
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    type: null,
+    imageId: null,
+  });
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { data: images, isLoading, refetch } = useQuery("images", getImages);
@@ -30,14 +37,29 @@ export default function ManageImagesPage() {
     toast.success("Image list refreshed");
   };
 
+  const handleDelete = (imageId) => {
+    setModalState({
+      isOpen: true,
+      type: "single",
+      imageId,
+    });
+  };
+
   const handleDeleteAll = () => {
-    if (
-      window.confirm(
-        "Are you sure you want to delete ALL images? This action cannot be undone!"
-      )
-    ) {
+    setModalState({
+      isOpen: true,
+      type: "all",
+      imageId: null,
+    });
+  };
+
+  const handleConfirmDelete = () => {
+    if (modalState.type === "single") {
+      deleteMutation.mutate(modalState.imageId);
+    } else {
       deleteAllMutation.mutate();
     }
+    setModalState({ isOpen: false, type: null, imageId: null });
   };
 
   if (isLoading) {
@@ -64,6 +86,22 @@ export default function ManageImagesPage() {
           </button>
         </div>
       </div>
+
+      <ConfirmationModal
+        isOpen={modalState.isOpen}
+        onClose={() =>
+          setModalState({ isOpen: false, type: null, imageId: null })
+        }
+        onConfirm={handleConfirmDelete}
+        title={
+          modalState.type === "single" ? "Delete Image" : "Delete All Images"
+        }
+        message={
+          modalState.type === "single"
+            ? "Are you sure you want to delete this image? This action cannot be undone."
+            : "Are you sure you want to delete ALL images? This action cannot be undone!"
+        }
+      />
 
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <ul className="divide-y divide-gray-200">
@@ -112,15 +150,7 @@ export default function ManageImagesPage() {
                     <FaEdit />
                   </button>
                   <button
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          "Are you sure you want to delete this image?"
-                        )
-                      ) {
-                        deleteMutation.mutate(image.id);
-                      }
-                    }}
+                    onClick={() => handleDelete(image.id)}
                     className="p-2 text-red-600 hover:bg-red-50 rounded-full"
                     title="Delete Image"
                   >
