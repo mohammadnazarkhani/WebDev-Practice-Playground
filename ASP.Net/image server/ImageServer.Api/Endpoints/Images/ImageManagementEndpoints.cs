@@ -33,6 +33,22 @@ public static class ImageManagementEndpoints
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .DisableAntiforgery();
 
+        app.MapDelete("/images/all", async (IImageService imageService) =>
+        {
+            var (success, message) = await imageService.DeleteAllImagesAsync();
+            return success ? Results.Ok(new { message }) : Results.BadRequest(new { error = message });
+        })
+        .WithOpenApi(operation =>
+        {
+            operation.Summary = "Delete all images";
+            operation.Description = "Delete all stored images from the server";
+            operation.Tags = ImageTags;
+            return operation;
+        })
+        .Produces(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .DisableAntiforgery();
+
         return app;
     }
 }
