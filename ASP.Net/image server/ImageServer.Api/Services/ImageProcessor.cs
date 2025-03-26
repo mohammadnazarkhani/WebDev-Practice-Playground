@@ -6,7 +6,7 @@ namespace ImageServer.Api.Services;
 
 public class ImageProcessor : IImageProcessor
 {
-    public async Task<string> CreateThumbnailAsync(string sourcePath, string targetDirectory, int width = 150, int height = 150)
+    public async Task<string> CreateThumbnailAsync(string sourcePath, string targetDirectory, int width = 300, int height = 300)
     {
         var fileName = Path.GetFileName(sourcePath);
         var thumbnailFileName = $"thumb_{fileName}";
@@ -23,7 +23,11 @@ public class ImageProcessor : IImageProcessor
             .Resize(newWidth, newHeight)
             .BackgroundColor(Color.White)); // Optional: add background color for transparent images
 
-        await image.SaveAsync(thumbnailPath);
+        // Set JPEG quality to 80% for a good balance between quality and file size
+        await image.SaveAsJpegAsync(thumbnailPath, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder
+        {
+            Quality = 80
+        });
         return thumbnailPath;
     }
 }
