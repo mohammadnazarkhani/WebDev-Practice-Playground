@@ -1,0 +1,28 @@
+<UserControl x:Class="ImageServer.WPFClient.UserControls.MainToolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ToolBarTray Background="#F0F0F0">
+        <ToolBar Band="0">
+            <Button Command="{Binding UploadImageCommand}"
+                    ToolTip="Upload Image">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/upload.png"
+                           Width="16"
+                           Height="16"
+                           Margin="0,0,5,0"/>
+                    <TextBlock Text="Upload"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding LoadImagesCommand}"
+                    ToolTip="Refresh">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/refresh.png"
+                           Width="16"
+                           Height="16"
+                           Margin="0,0,5,0"/>
+                    <TextBlock Text="Refresh"/>
+                </StackPanel>
+            </Button>
+        </ToolBar>
+    </ToolBarTray>
+</UserControl>
