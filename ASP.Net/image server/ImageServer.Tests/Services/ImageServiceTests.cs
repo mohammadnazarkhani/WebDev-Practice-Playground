@@ -196,4 +196,91 @@ public class ImageServiceTests
         _imageRepositoryMock.Verify(x => x.Remove(It.IsAny<Image>()), Times.Never);
         _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Never);
     }
+
+    [Fact]
+    public async Task GetImageAsync_NonExistingImage_ReturnsNotFound()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        _imageRepositoryMock.Setup(x => x.GetByIdAsync(id))
+            .ReturnsAsync((Image?)null);
+
+        // Act
+        var result = await _imageService.GetImageAsync(id);
+
+        // Assert
+        Assert.False(result.found);
+        Assert.Equal("Image not found", result.error);
+    }
+
+    [Fact]
+    public async Task GetImageAsync_MissingFile_ReturnsError()
+    {
+        // Arrange
+        var image = TestImageFixture.CreateTestImage();
+        image.FilePath = "nonexistent.jpg";
+
+        _imageRepositoryMock.Setup(x => x.GetByIdAsync(image.Id))
+            .ReturnsAsync(image);
+
+        // Act
+        var result = await _imageService.GetImageAsync(image.Id);
+
+        // Assert
+        Assert.False(result.found);
+        Assert.Equal("Image file not found", result.error);
+    }
+
+    [Fact]
+    public async Task UpdateImageAsync_ValidUpdate_ReturnsSuccess()
+    {
+        // Arrange
+        var image = TestImageFixture.CreateTestImage();
+        var newName = "Updated Name";
+        var file = TestImageFixture.CreateTestFormFile();
+        var filePath = "test/path/image.jpg";
+        var thumbnailPath = "test/path/thumb_image.jpg";
+
+        _imageRepositoryMock.Setup(x => x.GetByIdAsync(image.Id))
+            .ReturnsAsync(image);
+        _fileServiceMock.Setup(x => x.ValidateFile(file))
+            .ReturnsAsync((true, null));
+        _fileServiceMock.Setup(x => x.GetFilePath(It.IsAny<Guid>(), It.IsAny<string>()))
+            .Returns(filePath);
+        _fileSettingsMock.Setup(x => x.UploadPath)
+            .Returns("uploads");
+        _imageProcessorMock.Setup(x => x.CreateThumbnailAsync(
+            It.IsAny<string>(),
+            It.IsAny<string>(),
+            It.IsAny<int>(),
+            It.IsAny<int>()))
+            .ReturnsAsync(thumbnailPath);
+
+        // Act
+        var result = await _imageService.UpdateImageAsync(image.Id, newName, file);
+
+        // Assert
+        Assert.True(result.success);
+        _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+    }
+
+    [Fact]
+    public async Task UploadImageAsync_ErrorSavingFile_ReturnsFalse()
+    {
+        // Arrange
+        var file = TestImageFixture.CreateTestFormFile();
+        var dto = new ImageUploadDto { Name = "test", File = file };
+
+        _fileServiceMock.Setup(x => x.ValidateFile(file))
+            .ReturnsAsync((true, null));
+        _fileServiceMock.Setup(x => x.SaveFileAsync(file, It.IsAny<string>()))
+            .ThrowsAsync(new IOException("Error saving file"));
+
+        // Act
+        var result = await _imageService.UploadImageAsync(dto);
+
+        // Assert
+        Assert.False(result.success);
+        Assert.Contains("Error uploading image", result.result.ToString());
+    }
 }
