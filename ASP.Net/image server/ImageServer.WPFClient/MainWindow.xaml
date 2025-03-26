@@ -36,7 +36,7 @@
         <!-- Custom Title Bar -->
         <Grid DockPanel.Dock="Top"
               Height="30"
-              Background="#F0F0F0"
+              Background="#2b579a"
               MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -55,7 +55,8 @@
                        Text="Image Server Client"
                        VerticalAlignment="Center"
                        Margin="5,0,0,0"
-                       FontSize="12"/>
+                       FontSize="12"
+                       Foreground="White"/>
 
             <StackPanel Grid.Column="2"
                         Orientation="Horizontal"
@@ -63,7 +64,7 @@
                 <Button Style="{StaticResource WindowButtonStyle}"
                         Click="MinimizeButton_Click">
                     <Path Data="M 0,0 H 10"
-                          Stroke="Black"
+                          Stroke="White"
                           StrokeThickness="1"
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"/>
@@ -71,7 +72,7 @@
                 <Button Style="{StaticResource WindowButtonStyle}"
                         Click="MaximizeButton_Click">
                     <Path Data="M 0,0 H 10 V 10 H 0 Z"
-                          Stroke="Black"
+                          Stroke="White"
                           StrokeThickness="1"
                           Fill="Transparent"
                           VerticalAlignment="Center"
@@ -81,7 +82,7 @@
                         Click="CloseButton_Click"
                         x:Name="CloseButton">
                     <Path Data="M 0,0 L 10,10 M 0,10 L 10,0"
-                          Stroke="Black"
+                          Stroke="White"
                           StrokeThickness="1"
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"/>

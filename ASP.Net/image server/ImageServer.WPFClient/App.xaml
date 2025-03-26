@@ -4,7 +4,7 @@
     <Application.Resources>
         <Style TargetType="{x:Type TabControl}">
             <Setter Property="Background"
-                    Value="#F0F0F0"/>
+                    Value="#f3f3f3"/>
             <Setter Property="BorderThickness"
                     Value="0"/>
             <Setter Property="Padding"
@@ -21,7 +21,14 @@
                                               VerticalAlignment="Center"
                                               HorizontalAlignment="Center"
                                               ContentSource="Header"
-                                              Margin="10,2"/>
+                                              Margin="10,2">
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground"
+                                                Value="#2b579a"/>
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected"
