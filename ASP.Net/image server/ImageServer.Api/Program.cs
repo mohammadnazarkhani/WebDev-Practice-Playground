@@ -16,7 +16,22 @@ using ImageServer.Api.Extensions.Middleware;
 using ImageServer.Api.Models;
 using ImageServer.Api.Data.UnitOfWork;
 
+// Ensure upload directory exists before app configuration
+var currentDirectory = Directory.GetCurrentDirectory();
+var uploadDirectory = Path.Combine(currentDirectory, "uploads");
+if (!Directory.Exists(uploadDirectory))
+{
+    Directory.CreateDirectory(uploadDirectory);
+}
+
+// Create wwwroot to satisfy the framework
+Directory.CreateDirectory(Path.Combine(currentDirectory, "wwwroot"));
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure paths and disable static files
+builder.Environment.WebRootPath = string.Empty;  // Use empty string instead of null
+builder.Configuration["StaticWebAssets:Enabled"] = "false";
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -128,27 +143,11 @@ try
         });
     }
 
-    // Ensure directories exist
-    var directories = new[]
-    {
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"),
-        Path.Combine(Directory.GetCurrentDirectory(), "uploads")
-    };
-
-    foreach (var dir in directories)
-    {
-        if (!Directory.Exists(dir))
-        {
-            Directory.CreateDirectory(dir);
-        }
-    }
-
     app.UseHttpsRedirection();
     app.UseCookiePolicy();
     app.UseAntiforgery();
     app.UseCors("AllowAll");
     app.UseFileValidation();
-    app.UseStaticFiles();
     app.MapImageEndpoints();
 
     app.Run();
