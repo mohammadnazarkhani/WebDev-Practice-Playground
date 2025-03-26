@@ -33,6 +33,13 @@ export const updateImage = async (id, formData) => {
   return response.data;
 };
 
+export const patchImage = async (id, formData) => {
+  const response = await api.patch(`/images/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return response.data;
+};
+
 export const getImageDetails = async (id) => {
   const response = await api.get(`/images/${id}/details`);
   return response.data;
