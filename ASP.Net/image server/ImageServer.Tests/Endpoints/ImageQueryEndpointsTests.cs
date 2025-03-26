@@ -136,4 +136,81 @@ public class ImageQueryEndpointsTests : TestBase
         Assert.False(result.found);
         Assert.NotNull(result.error);
     }
+
+    [Fact]
+    public async Task GetImageDetails_WithValidId_ReturnsDetails()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        var details = new ImageDetailsResponseDto(
+            id,
+            "test.jpg",
+            "image/jpeg",
+            1024,
+            DateTime.UtcNow,
+            null,
+            "http://test/image.jpg",
+            "http://test/image_thumb.jpg",
+            "/path/to/image.jpg",
+            "/path/to/thumb.jpg",
+            new Dictionary<string, object>
+            {
+                { "exists", true },
+                { "hasThumbnail", true },
+                { "extension", ".jpg" }
+            }
+        );
+
+        _imageServiceMock
+            .Setup(x => x.GetImageDetailsAsync(id))
+            .ReturnsAsync((true, details, null));
+
+        // Act
+        var result = await _imageServiceMock.Object.GetImageDetailsAsync(id);
+
+        // Assert
+        Assert.True(result.found);
+        Assert.NotNull(result.details);
+        Assert.Equal(id, result.details.Id);
+        Assert.Equal("test.jpg", result.details.Name);
+        Assert.True(result.details.Metadata.ContainsKey("exists"));
+        Assert.True(result.details.Metadata.ContainsKey("hasThumbnail"));
+        Assert.True(result.details.Metadata.ContainsKey("extension"));
+    }
+
+    [Fact]
+    public async Task GetImageDetails_WithInvalidId_ReturnsNotFound()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        _imageServiceMock
+            .Setup(x => x.GetImageDetailsAsync(id))
+            .ReturnsAsync((false, null, "Image not found"));
+
+        // Act
+        var result = await _imageServiceMock.Object.GetImageDetailsAsync(id);
+
+        // Assert
+        Assert.False(result.found);
+        Assert.Null(result.details);
+        Assert.Equal("Image not found", result.error);
+    }
+
+    [Fact]
+    public async Task GetImageDetails_WithEmptyGuid_ReturnsBadRequest()
+    {
+        // Arrange
+        var emptyGuid = Guid.Empty;
+        _imageServiceMock
+            .Setup(x => x.GetImageDetailsAsync(emptyGuid))
+            .ReturnsAsync((false, null, "Invalid image ID"));
+
+        // Act
+        var result = await _imageServiceMock.Object.GetImageDetailsAsync(emptyGuid);
+
+        // Assert
+        Assert.False(result.found);
+        Assert.Null(result.details);
+        Assert.NotNull(result.error);
+    }
 }
