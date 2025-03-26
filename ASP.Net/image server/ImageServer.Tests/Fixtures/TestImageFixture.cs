@@ -5,13 +5,14 @@ namespace ImageServer.Tests.Fixtures;
 
 public class TestImageFixture
 {
-    public static Image CreateTestImage()
+    public static Image CreateTestImage(bool withThumbnail = false)
     {
         return new Image
         {
             Id = Guid.NewGuid(),
             Name = "test-image",
             FilePath = "test/path/image.jpg",
+            ThumbnailPath = withThumbnail ? "test/path/thumb_image.jpg" : null,
             ContentType = "image/jpeg",
             FileSize = 1024,
             CreatedAt = DateTime.UtcNow

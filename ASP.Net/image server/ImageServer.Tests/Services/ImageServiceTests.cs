@@ -283,4 +283,61 @@ public class ImageServiceTests
         Assert.False(result.success);
         Assert.Contains("Error uploading image", result.result.ToString());
     }
+
+    [Fact]
+    public async Task DeleteAllImagesAsync_WithImages_ReturnsSuccess()
+    {
+        // Arrange
+        var images = new List<Image>
+        {
+            TestImageFixture.CreateTestImage(withThumbnail: true),
+            TestImageFixture.CreateTestImage(withThumbnail: true)
+        };
+
+        _imageRepositoryMock.Setup(x => x.GetAllAsync())
+            .ReturnsAsync(images);
+
+        _fileServiceMock.Setup(x => x.DeleteFile(It.IsAny<string>()))
+            .Verifiable();
+
+        _unitOfWorkMock.Setup(x => x.SaveChangesAsync())
+            .ReturnsAsync(1);
+
+        // Act
+        var result = await _imageService.DeleteAllImagesAsync();
+
+        // Assert
+        Assert.True(result.success);
+        Assert.Contains("deleted successfully", result.message);
+        _fileServiceMock.Verify(x => x.DeleteFile(It.IsAny<string>()), Times.Exactly(images.Count * 2)); // For both image and thumbnail
+        _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+    }
+
+    [Fact]
+    public async Task DeleteAllImagesAsync_WithError_ReturnsFalse()
+    {
+        // Arrange
+        var images = new List<Image> { TestImageFixture.CreateTestImage() };
+        _imageRepositoryMock.Setup(x => x.GetAllAsync())
+            .ReturnsAsync(images);
+
+        _fileServiceMock.Setup(x => x.DeleteFile(It.IsAny<string>()))
+            .Throws(new IOException("Error deleting file"));
+
+        // Act
+        var result = await _imageService.DeleteAllImagesAsync();
+
+        // Assert
+        Assert.False(result.success);
+        Assert.Contains("Failed to delete all images", result.message);
+        _unitOfWorkMock.Verify(x => x.SaveChangesAsync(), Times.Never);
+        _loggerMock.Verify(
+            x => x.Log(
+                LogLevel.Error,
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, t) => true),
+                It.IsAny<Exception>(),
+                It.Is<Func<It.IsAnyType, Exception?, string>>((o, t) => true)),
+            Times.Once);
+    }
 }

@@ -31,18 +31,18 @@ public class ImageManagementEndpointsTests : TestBase
     }
 
     [Fact]
-    public void CleanupUploads_ReturnsSuccess()
+    public async Task DeleteAllImages_ReturnsSuccess()
     {
         // Arrange
         _imageServiceMock
-            .Setup(x => x.CleanupUploads())
-            .Returns((true, "Directory cleaned successfully"));
+            .Setup(x => x.DeleteAllImagesAsync())
+            .ReturnsAsync((true, "All images deleted successfully"));
 
         // Act
-        var result = _imageServiceMock.Object.CleanupUploads();
+        var result = await _imageServiceMock.Object.DeleteAllImagesAsync();
 
         // Assert
         Assert.True(result.success);
-        Assert.Contains("cleaned successfully", result.message);
+        Assert.Contains("deleted successfully", result.message);
     }
 }
