@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreShowcase", "EFCoreShowcase\EFCoreShowcase.csproj", "{8A657414-5EE0-4041-A831-354047132FC8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreShowcase.Tests", "EFCoreShowcase.Tests\EFCoreShowcase.Tests.csproj", "{6B7078C9-1C16-4591-A820-6FBB99E84620}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A657414-5EE0-4041-A831-354047132FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A657414-5EE0-4041-A831-354047132FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A657414-5EE0-4041-A831-354047132FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A657414-5EE0-4041-A831-354047132FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B7078C9-1C16-4591-A820-6FBB99E84620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B7078C9-1C16-4591-A820-6FBB99E84620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B7078C9-1C16-4591-A820-6FBB99E84620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B7078C9-1C16-4591-A820-6FBB99E84620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDAFE214-C491-4BC7-A5CE-761BF93FD2E2}
+	EndGlobalSection
+EndGlobal
