@@ -1,0 +1,94 @@
+## .NET Core
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+## Visual Studio Code
+.vscode/
+*.code-workspace
+
+## Visual Studio
+.vs/
+*.ncrunch*
+*.[Cc]ache
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+
+## Rider
+.idea/
+
+## SQLite
+*.db
+*.db-shm
+*.db-wal
+
+## Logs
+*.log
+logs/
+
+## Environment Files
+*.env
+.env.*
+!.env.example
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## NuGet Packages
+*.nupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+## Test Results
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+coverage.json
+coverage.info
+coverage/
+
+## ASP.NET Specific
+wwwroot/lib/
+*.min.css
+*.min.js
+appsettings.*.json
+!appsettings.example.json
+
+## Code Coverage Tools
+coverage*/
+*.opencover.xml
+*.dotCover
+
+## Visual Studio Test Projects
+*.TestAdapter.dll
+*.TestResults.xml
+
+## Misc
+node_modules/
+bower_components/
+dist/
+tmp/
+temp/
+PublishProfiles/
+*.pubxml
+*.pubxml.user
+launchSettings.json
